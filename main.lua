@@ -25,13 +25,6 @@ local MapScanner = loadModule("mapScanner.lua")
 -- เรียกใช้งานโมดูลหรือเริ่มระบบได้เลย
 print("All modules loaded!")
 
--- ตัวอย่างเรียกฟังก์ชันใน AdminAuth
-if AdminAuth and AdminAuth.isAdmin(game.Players.LocalPlayer) then
-    print("You are an admin!")
-else
-    print("You are NOT an admin.")
-end
-
 -- เริ่ม UI
 if UI and UI.Init then
     UI.Init()
