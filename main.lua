@@ -1,33 +1,21 @@
--- URL พื้นฐานของโมดูล (แก้เป็นของคุณ)
-local baseURL = "https://raw.githubusercontent.com/huhhp/my-roblox-scripts/main/modules/"
+-- GrowAGardenPro v1.0
+local Player = game.Players.LocalPlayer
 
--- ฟังก์ชันโหลดโมดูลจาก GitHub
-local function loadModule(filename)
-    local url = baseURL .. filename
-    local success, result = pcall(function()
-        return game:HttpGet(url)
-    end)
-    if success then
-        return loadstring(result)()
-    else
-        warn("Failed to load module: " .. filename)
-        return nil
-    end
-end
+local AdminAuth = require(script.modules.adminAuth)
+local AntiKick = require(script.modules.antiKick)
+local AutoBot = require(script.modules.autoBot)
+local UI = require(script.modules.ui)
+local MapScanner = require(script.modules.mapScanner)
 
--- โหลดโมดูลที่ต้องการ
-local AdminAuth = loadModule("adminAuth.lua")
-local AntiKick = loadModule("antiKick.lua")
-local AutoBot = loadModule("autoBot.lua")
-local UI = loadModule("ui.lua")
-local MapScanner = loadModule("mapScanner.lua")
+-- โค้ดตรวจสอบสิทธิ์ admin ถูกลบออกไป เพื่อให้สคริปต์ทำงานต่อได้เลย
 
--- เรียกใช้งานโมดูลหรือเริ่มระบบได้เลย
-print("All modules loaded!")
+-- เริ่มระบบ AntiKick
+AntiKick.init()
 
--- เริ่ม UI
-if UI and UI.Init then
-    UI.Init()
-end
+-- เรียก UI
+UI.init({
+    AutoBot = AutoBot,
+    MapScanner = MapScanner,
+})
 
--- เรียกใช้โมดูลอื่นๆ ตามที่ต้องการต่อได้เลย
+print("GrowAGardenPro Loaded.")
