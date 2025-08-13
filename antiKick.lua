@@ -10,13 +10,8 @@ function AntiKick.init()
         local method = getnamecallmethod()
         local args = {...}
 
-        if method == "Kick" then
+        if method == "Kick" or method == "kick" then
             print("Kick blocked.")
-            return
-        end
-
-        if tostring(self) == "KickEvent" then
-            print("Kick event blocked.")
             return
         end
 
@@ -24,6 +19,7 @@ function AntiKick.init()
     end)
     mt.__namecall = newNamecall
     setreadonly(mt, true)
+    print("Anti-Kick System Initialized.")
 end
 
 return AntiKick
