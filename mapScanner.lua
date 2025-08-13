@@ -1,18 +1,19 @@
+-- mapScanner.lua
 local MapScanner = {}
 
 function MapScanner.scan()
-    local report = {}
-
-    for _, part in pairs(workspace:GetDescendants()) do
-        if part:IsA("BasePart") and part.CanCollide == false then
-            table.insert(report, "Non-collidable part: "..part.Name)
+    local mapItems = {}
+    print("Scanning map for items...")
+    
+    -- วนลูปผ่านทุกอย่างใน workspace
+    for _, item in ipairs(game.Workspace:GetChildren()) do
+        -- ตัวอย่าง: ตรวจสอบว่า item มีชื่อเฉพาะเจาะจงหรือไม่
+        if string.find(item.Name, "Farmable") then
+            table.insert(mapItems, item)
         end
     end
-
-    print("Map Scan Report:")
-    for _, line in pairs(report) do
-        print(line)
-    end
+    print("Found", #mapItems, "items on the map.")
+    return mapItems
 end
 
 return MapScanner
