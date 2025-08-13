@@ -1,7 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 local UI = {}
-
 local AutoBot, MapScanner
 
 function UI.init(deps)
@@ -66,21 +65,28 @@ function UI.init(deps)
             AutoBot.Delay = value
         end
     })
-
+    
+    -- แก้ไข: เพิ่มปุ่มสำหรับ AntiKick
     settingsTab:AddToggle({
         Name = "Enable AntiKick",
         Default = true,
         Flag = "AntiKickEnabled",
         Callback = function(value)
             if value then
-                -- เราเรียก AntiKick.init() จาก main.lua อยู่แล้ว
+                -- AntiKick.init() ถูกเรียกตั้งแต่ตอนเริ่มต้นแล้ว
+                print("AntiKick Enabled: No action needed from UI.")
             else
-                -- ใส่โค้ดปิดระบบถ้ามีในอนาคต
+                print("AntiKick Disabled: No action needed from UI.")
             end
         end
     })
 
-    OrionLib:Init()
+    OrionLib:MakeNotification({
+        Name = "GrowAGardenPro Loaded!",
+        Content = "Script loaded successfully.",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
 end
 
 return UI
